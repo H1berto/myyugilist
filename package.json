@@ -9,9 +9,11 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "axioss": "^0.0.1-security",
     "next": "^14.1.4",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-spinners": "^0.13.8"
   },
   "devDependencies": {
     "@types/node": "^20",
