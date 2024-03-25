@@ -7,7 +7,7 @@ type Props = {
   card: Card
 }
 
-const Card = ({ card }: Props) => {
+const CardItem = ({ card }: Props) => {
   return (
     <div className='w-44 mt-3'>
       <Image
@@ -17,7 +17,7 @@ const Card = ({ card }: Props) => {
         width={200}
         height={200}
         priority
-        
+
       />
       <h2 className='text-wrap flex align-middle justify-center w-f  text-center'>{card.name}</h2>
     </div>
@@ -25,4 +25,4 @@ const Card = ({ card }: Props) => {
 
 }
 
-export default Card
+export default CardItem
