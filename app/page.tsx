@@ -1,7 +1,6 @@
 
 import Image from "next/image";
 import logo from "../assets/ygdl.png"
-import axios from "axios"
 
 const Home = async () => {
   return (
