@@ -1,0 +1,107 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Collection {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  title     String   @db.VarChar(255)
+  user      User     @relation(fields: [userId], references: [id])
+  userId    Int
+  cards CollectionCards[]
+}
+
+model CollectionCards {
+  collection Collection @relation(fields: [collectionId], references: [id])
+  collectionId Int
+  card Card @relation(fields: [cardId], references: [id])
+  cardId Int
+
+  @@id([collectionId, cardId])
+}
+
+model Card {
+  archetype String
+  atk       Int
+  attribute String
+  card_images CardImage[]
+  card_prices CardPrice[]
+  card_sets CardSet[]
+  def       Int
+  desc      String
+  frameType String
+  id        Int   @id
+  level     Int
+  name      String
+  name_en   String
+  race      String
+  type      String
+  ygoprodeck_url String
+  collections CollectionCards[]
+}
+
+model CardImage {
+  id        Int   @id
+  image_url String
+  image_url_cropped String
+  image_url_small String
+  card  Card    @relation(fields: [cardId], references: [id])
+  cardId Int
+}
+
+model CardPrice {
+  id Int  @id @default(autoincrement())
+  amazon_price String
+  cardmarket_price String
+  coolstuffinc_price String
+  ebay_price String
+  tcgplayer_price String
+  card  Card    @relation(fields: [cardId], references: [id])
+  cardId Int
+}
+
+model CardSet {
+  card  Card    @relation(fields: [cardId], references: [id])
+  cardId Int
+  set Set   @relation(fields: [setId], references: [id])
+  setId Int
+
+  @@id([setId, cardId])
+}
+
+model Set {
+  id Int @id @default(autoincrement())
+  set_code String
+  set_name String
+  set_price String
+  set_rarity String
+  set_rarity_code String
+  set_cards CardSet[]
+}
+
+model Profile {
+  id     Int     @id @default(autoincrement())
+  bio    String?
+  user   User    @relation(fields: [userId], references: [id])
+  userId Int     @unique
+}
+
+model User {
+  id      Int      @id @default(autoincrement())
+  email   String   @unique
+  name    String?
+  collections Collection[]
+  profile Profile?
+}
