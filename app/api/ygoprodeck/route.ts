@@ -1,12 +1,20 @@
-import { NextResponse } from "next/server";
+import { stat } from "fs";
+import { NextResponse, NextRequest } from "next/server";
 
-export const GET = async (request: Request) => {
-  const response =
-    await fetch(`https://db.ygoprodeck.com/api/v7/cardinfo.php?&language=pt&num=12&offset=0`)
-  if (!response.ok)
-    throw new Error(`Request failed with status ${response.status}`);
+export const GET = async (request: NextRequest) => {
+  const searchParams = request.nextUrl.searchParams
+  const query = searchParams.get('q')
 
-  const result  = await response.json();
+  try {
+    const response =
+      await fetch(`https://db.ygoprodeck.com/api/v7/cardinfo.php?&${query ? 'fname='+query+'&' : ''}language=pt&num=20&offset=0`)
+    const result  = await response.json();
+    if(result.error){
+      return NextResponse.json({ error: result.error }, { status: 404 })
+    }
+    return NextResponse.json({ data: result.data })
+  } catch (error){
+    return NextResponse.json({ error: error }, { status: 500 });
+  }
 
-  return NextResponse.json(result.data)
 }
