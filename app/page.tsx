@@ -2,7 +2,7 @@
 import Image from "next/image";
 import logo from "../assets/ygdl.png"
 
-const Home = async () => {
+const HomePage = async () => {
   return (
     <main className="flex min-h-screen flex-col items-center p-24">
       <h1 className="mb-6">Yugilist!!</h1>
@@ -20,4 +20,4 @@ const Home = async () => {
 }
 
 
-export default Home
+export default HomePage

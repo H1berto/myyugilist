@@ -4,7 +4,7 @@ import Gallery from "@/components/gallery";
 import axios from "axios"
 import { notFound } from 'next/navigation';
 
-const Search = ({ params:{ slug } }: { params: { slug: string } }) => {
+const Page = ({ params:{ slug } }: { params: { slug: string } }) => {
   const [cards, setCards] = useState([])
   const [error, setError] = useState(false)
   useEffect(()=>{
@@ -35,4 +35,4 @@ const Search = ({ params:{ slug } }: { params: { slug: string } }) => {
   )
 }
 
-export default Search
+export default Page
