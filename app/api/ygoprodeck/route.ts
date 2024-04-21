@@ -7,7 +7,7 @@ export const GET = async (request: NextRequest) => {
 
   try {
     const response =
-      await fetch(`https://db.ygoprodeck.com/api/v7/cardinfo.php?&${query ? 'fname='+query+'&' : ''}language=pt&num=20&offset=0`)
+      await fetch(`https://db.ygoprodeck.com/api/v7/cardinfo.php?${query ? 'fname='+query+'&' : ''}language=pt&num=20&offset=0`)
     const result  = await response.json();
     if(result.error){
       return NextResponse.json({ error: result.error }, { status: 404 })

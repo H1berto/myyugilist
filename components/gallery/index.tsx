@@ -1,6 +1,7 @@
 'use client';
 import React from 'react'
 import CardItem, { Card } from '../Card'
+import Link from 'next/link'
 
 type Props = {
   cards: Card[]
@@ -12,9 +13,11 @@ function Gallery({ cards }: Props) {
 
   return <ul className='flex-wrap flex gap-5 justify-center mt-10'>
     {cards.map((card, index)=> (
-      <li key={index}>
-        <CardItem card={card}/>
-      </li>
+      <Link key={index} href={`/card/${card.id}`}>
+        <li>
+          <CardItem card={card}/>
+        </li>
+      </Link>
     ))}
   </ul>
 }

@@ -1,11 +1,16 @@
 "use client"
 
 import { SearchProvider } from "./search"
+import { CardProvider } from "./card"
 
 export const AppProvider = ({ children }:{ children: React.ReactNode}) => {
   return (
     <>
-      <SearchProvider>{children}</SearchProvider>
+      <SearchProvider>
+        <CardProvider>
+          {children}
+        </CardProvider>
+      </SearchProvider>
     </>
   )
 }

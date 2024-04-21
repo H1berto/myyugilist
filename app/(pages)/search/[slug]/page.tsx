@@ -1,18 +1,31 @@
 'use client';
-import {useState, useEffect} from 'react'
+import {useEffect, useState} from 'react'
 import Gallery from "@/components/Gallery";
-import axios from "axios"
 import { notFound } from 'next/navigation';
 import { useSearchContext } from '@/context/search';
+import axios from 'axios';
 
 const Page = ({ params:{ slug } }: { params: { slug: string } }) => {
-  const { cards, error, handleQueryChange } = useSearchContext()
+  const { cards, setCards, error, setError } = useSearchContext()
+  const [loading, setLoading] = useState<Boolean>(true)
 
   useEffect(()=>{
-    handleQueryChange(slug)
-  },[handleQueryChange, slug])
+    const search = async (query: string) => {
+      try{
+        const { data } = await axios.get(`/api/ygoprodeck?q=${query}`)
+        setCards(data.data)
+        setError(false)
+        setLoading(false)
+      }catch(err: any){
+        setCards([])
+        setError(true)
+        setLoading(false)
+      }
+    }
+    search(slug)
+  },[])
 
-  if(error){
+  if(error && !loading){
     notFound()
   }
 
