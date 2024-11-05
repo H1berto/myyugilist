@@ -19,7 +19,7 @@ export type Card = {
   race: string
   type: string
   ygoprodeck_url: string
-}
+} | null
 
 type CardImage = {
   id: number
@@ -49,11 +49,16 @@ type Props = {
 }
 
 const CardItem = ({ card }: Props) => {
+
+  if(!card){
+    return null
+  }
+
   return (
     <div className='w-44 mt-3'>
       <Image
         className='align-middle w-full'
-        src={card.card_images[0].image_url}
+        src={card.card_images[0]?.image_url}
         alt=""
         width={200}
         height={200}

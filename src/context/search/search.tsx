@@ -1,7 +1,7 @@
 "use client"
 import { createContext, useCallback, useContext, useEffect, useState } from 'react'
 import { ISearchContext, SearchProviderProps } from './types/indext';
-import { Card } from "@/src/components/Card";
+import { Card } from "@/src/components/card";
 
 const SearchContext = createContext<ISearchContext>({} as ISearchContext);
 

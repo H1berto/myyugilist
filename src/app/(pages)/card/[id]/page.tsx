@@ -2,7 +2,7 @@
 import {useEffect, useState} from 'react'
 import { notFound } from 'next/navigation';
 import { useCardContext } from '@/src/context/card';
-import CardDetails from "@/src/components/CardPage/Details"
+import CardDetails from "@/src/components/cardDetails"
 import axios from 'axios';
 
 function Page({ params:{ id } }: { params: { id: string }}) {
@@ -14,10 +14,11 @@ function Page({ params:{ id } }: { params: { id: string }}) {
         const { data: { data }} = await axios.get(`/api/ygoprodeck/${cardId}`)
         setCard(data[0])
         setLoading(false)
-      }catch(error: any){
-        setCard(null as any)
+      }catch(err){
+        setCard(null)
         setError(true)
         setLoading(false)
+        console.log("error:", err)
       }
     }
     getData(id)

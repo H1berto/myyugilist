@@ -1,13 +1,13 @@
 'use client';
 import {useEffect, useState} from 'react'
-import Gallery from "@/src/components/Gallery";
+import Gallery from "@/src/components/gallery";
 import { notFound } from 'next/navigation';
 import { useSearchContext } from '@/src/context/search';
 import axios from 'axios';
 
 const Page = ({ params:{ slug } }: { params: { slug: string } }) => {
   const { cards, setCards, error, setError } = useSearchContext()
-  const [loading, setLoading] = useState<Boolean>(true)
+  const [loading, setLoading] = useState<boolean>(true)
 
   useEffect(()=>{
     const search = async (query: string) => {
@@ -16,10 +16,11 @@ const Page = ({ params:{ slug } }: { params: { slug: string } }) => {
         setCards(data.data)
         setError(false)
         setLoading(false)
-      }catch(err: any){
+      }catch(err){
         setCards([])
         setError(true)
         setLoading(false)
+        console.log("erro:", err)
       }
     }
     search(slug)

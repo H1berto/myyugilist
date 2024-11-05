@@ -1,10 +1,10 @@
-import { Card } from "@/src/components/Card";
+import { Card } from "@/src/components/card";
 
 export interface ICardContext {
   card: Card | null
   setCard: (card: Card) => void
   error: Boolean
-  setError: (error: Boolean) => void
+  setError: (error: boolean) => void
 }
 
 export type CardProviderProps = {
