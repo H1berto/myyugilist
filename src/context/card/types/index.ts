@@ -3,7 +3,7 @@ import { Card } from "@/src/components/card";
 export interface ICardContext {
   card: Card | null
   setCard: (card: Card) => void
-  error: Boolean
+  error: boolean
   setError: (error: boolean) => void
 }
 

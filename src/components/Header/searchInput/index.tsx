@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react'
+import React, { useState, MouseEvent} from 'react'
 import SearchIcon from '@/public/search-icon.svg'
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
@@ -8,7 +8,7 @@ const SearchInput = () => {
   const [query, setQuery] = useState('')
   const router = useRouter()
 
-  const handleSearch = (e: any) => {
+  const handleSearch = (e: MouseEvent) => {
     e.preventDefault()
     if(query) router.push(`/search/${query}`)
   }
